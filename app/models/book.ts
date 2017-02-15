@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function(sequelize, DataTypes) {
+module.exports = function(sequelize: any, DataTypes: any) {
   var Book = sequelize.define('Book', {
     name: DataTypes.STRING,
     description: DataTypes.TEXT,
@@ -10,7 +10,7 @@ module.exports = function(sequelize, DataTypes) {
     underscored: true,
     tableName: 'book',
     classMethods: {
-      associate: function(models) {
+      associate: function(models: any) {
         Book.belongsTo(models.Author,{
           onDelete: 'CASCADE',
           hooks:true

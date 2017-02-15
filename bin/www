@@ -11,8 +11,8 @@ var http = require('http');
 /**
  * Get port from environment and store in Express.
  */
-
-var port = normalizePort(process.env.PORT || '3002');
+ 
+var port = normalizePort(process.env.NODE_PORT || '3002');
 app.set('port', port);
 
 /**
@@ -93,7 +93,7 @@ function onListening() {
 /*
  * Checking database connection
 */
-var models = require('../app/models/');
+var models = require('../built/models/');
 models.sequelize
   .authenticate()
   .then(function () {

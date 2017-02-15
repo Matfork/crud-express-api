@@ -24,8 +24,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // set the routes =============================
-//console.log(require('./app/routes').stack);
-app.use(require('./app/routes'));
+//console.log(require('./built/routes').stack);
+app.use(require('./built/routes'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

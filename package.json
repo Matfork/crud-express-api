@@ -17,9 +17,12 @@
     "morgan": "~1.7.0",
     "mysql": "^2.13.0",
     "sequelize": "^3.30.2",
-    "serve-favicon": "~2.3.2"
+    "serve-favicon": "~2.3.2",
+    "typescript": "^2.1.6"
   },
   "devDependencies": {
+    "@types/sequelize": "^4.0.41",
+    "@types/node": "^7.0.5",
     "nodemon": "^1.11.0"
   }
 }
