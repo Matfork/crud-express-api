@@ -18,13 +18,13 @@ router.get('/', function(req, res, next) {
 router.get('/author', authorController.index);
 router.get('/author/:id', authorController.show);
 router.post('/author', authorController.create);
-router.put('/author', authorController.update);
-router.put('/author/:id', authorController.delete);
+router.put('/author/:id', authorController.update);
+router.delete('/author/:id', authorController.delete);
 
 router.get('/book', bookController.index);
 router.get('/book/:id', bookController.show);
 router.post('/book', bookController.create);
-router.put('/book', bookController.update);
-router.put('/book/:id', bookController.delete);
+router.put('/book/:id', bookController.update);
+router.delete('/book/:id', bookController.delete);
 
 module.exports = router;

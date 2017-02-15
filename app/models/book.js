@@ -11,7 +11,10 @@ module.exports = function(sequelize, DataTypes) {
     tableName: 'book',
     classMethods: {
       associate: function(models) {
-        Book.belongsTo(models.Author);
+        Book.belongsTo(models.Author,{
+          onDelete: 'CASCADE',
+          hooks:true
+        });
       }
     }
   });

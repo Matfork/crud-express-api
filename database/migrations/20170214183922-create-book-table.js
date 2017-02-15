@@ -10,17 +10,21 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       description: {
-        type: Sequelize.TEXT
+        type: Sequelize.TEXT,
+        allowNull: true
       },
       publication_date: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        allowNull: true
       },
       author_id: {
         type: Sequelize.INTEGER,
-        references: { model: 'author', key: 'id' }
+        references: { model: 'author', key: 'id' },
+        allowNull: false      
       },
       created_at: {
          allowNull: false,

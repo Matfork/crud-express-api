@@ -11,7 +11,8 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate: function(models) {
         Author.hasMany(models.Book, {
-          onDelete: 'cascade'
+          onDelete: 'CASCADE',
+          hooks:true
         });
       }
     }
