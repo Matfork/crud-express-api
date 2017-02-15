@@ -2,16 +2,18 @@
   "compilerOptions": {
       "target": "es6",
       "module": "commonjs",
-       "noImplicitAny": true,
-       "removeComments": true,
-       "preserveConstEnums": true,
-       "outDir": "built",
-       "sourceMap": false
+      "noImplicitAny": true,
+      "removeComments": true,
+      "preserveConstEnums": true,
+      "outDir": "built",
+      "sourceMap": false
    },
    "include": [
        "app/**/*"
    ],
    "exclude": [
-    "node_modules"
-  ]
+      "node_modules",
+      "!node_modules/@types"
+   ],
+   "type" : ["node","express"]
 }
