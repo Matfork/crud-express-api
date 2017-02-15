@@ -3,10 +3,11 @@
       "target": "es6",
       "module": "commonjs",
       "noImplicitAny": true,
-      "removeComments": true,
+      "removeComments": false,
       "preserveConstEnums": true,
       "outDir": "built",
-      "sourceMap": false
+      "sourceMap": false,
+      "compileOnSave": false
    },
    "include": [
        "app/**/*"
@@ -15,5 +16,7 @@
       "node_modules",
       "!node_modules/@types"
    ],
-   "type" : ["node","express"]
+   "typeRoots": [
+      "../node_modules/@types"
+    ]
 }
