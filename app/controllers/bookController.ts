@@ -17,7 +17,10 @@ var bookController =  class {
 
   //Get a list of all book using model.findAll()
   public static index(req: any, res: any) {
-    return Book.findAll()
+    return Book.findAll({
+        order: [['id', 'ASC']],      
+        include: Author
+    })
       .then(function (books: any) {
         res.status(200).json({code: 200,data: books})
       })

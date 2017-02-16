@@ -5,6 +5,7 @@ var authorController = class {
   //Get a list of all authors using model.findAll()
   public static index( req : any, res: any) {
     Author.findAll({
+      order: [['id', 'ASC']],
       include: Book
     })
       .then(function (authors: any) {
