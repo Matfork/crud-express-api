@@ -1,3 +1,4 @@
+var Author = require('../models/').Author;
 var Book = require('../models/').Book;
 
 var bookController =  class {
