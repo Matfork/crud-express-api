@@ -30,7 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // set the routes =============================
 //console.log(require('./built/routes').stack);
-app.use(require('./built/routes'));
+app.use('/api',require('./built/routes'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

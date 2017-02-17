@@ -1,21 +1,23 @@
 'use strict';
 
 module.exports = function(sequelize: any, DataTypes: any) {
-  var Author = sequelize.define('Author', {
+  var User = sequelize.define('User', {
     first_name: DataTypes.STRING,
     last_name: DataTypes.STRING,
-    age: DataTypes.INTEGER
+    email: DataTypes.STRING,
+    password: DataTypes.STRING,
+    group_id: DataTypes.INTEGER
   }, {
     underscored: true,
-    tableName: 'author',
+    tableName: 'user',
     classMethods: {
       associate: function(models: any) {
-        Author.hasMany(models.Book, {
+        User.belongsTo(models.Group, {
           onDelete: 'CASCADE',
           hooks:true
         });
       }
     }
   });
-  return Author;
+  return User;
 };

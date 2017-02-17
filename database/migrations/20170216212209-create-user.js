@@ -2,30 +2,33 @@
 
 module.exports = {
   up: function (queryInterface, Sequelize) {
-    return queryInterface.createTable('book', {
+    return queryInterface.createTable('user', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
+      first_name: {
         type: Sequelize.STRING,
         allowNull: false
       },
-      description: {
-        type: Sequelize.TEXT,
+      last_name: {
+        type: Sequelize.STRING,
         allowNull: true
       },
-      publication_date: {
-        type: Sequelize.DATE,
-        allowNull: true
-      },
-      author_id: {
-        type: Sequelize.INTEGER,
-        references: { model: 'author', key: 'id' },
+      email: {
         allowNull: false,
-        onDelete: 'CASCADE'      
+        type: Sequelize.STRING,
+        unique: true
+      },
+      password: {
+        allowNull: false,
+        type: Sequelize.STRING,
+      },
+      group_id: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
       },
       created_at: {
          allowNull: false,
@@ -39,6 +42,6 @@ module.exports = {
   },
 
   down: function (queryInterface, Sequelize) {
-      return queryInterface.dropTable('book');
+    return queryInterface.dropTable('user');
   }
 };
