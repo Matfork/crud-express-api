@@ -29,8 +29,15 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // set the routes =============================
-//console.log(require('./built/routes').stack);
-app.use('/api',require('./built/routes'));
+//router from express append all its routes and middleware to app.use('/api'), so if
+//for loggedRoutes it will apply same middleware, thats a problem, what
+// we need is to apply middleware to certain routes, so we need to use instead app.use('/api/{certainroute}')
+// check routes directory files to see how we can accomplish this
+// app.use('/api',require('./built/routes/genRoutes.js'));
+// app.use('/api2',require('./built/routes/loggedRoutes.js'));
+
+app = require('./built/routes/genRoutes.js').addRoutes(app);
+app = require('./built/routes/loggedRoutes.js').addRoutes(app);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

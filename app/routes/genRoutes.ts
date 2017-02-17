@@ -1,12 +1,18 @@
- var express = require('express').Router(),
-  router = express.Router(),
-  authController = require('../controllers/authController');
+ var express     = require('express'),
+  authController = require('../controllers/authController'),
+  rIndex         = express.Router(),
+  rAuth          = express.Router();
 
-  /* GET home page. */
-  router.get('/', function(req: any, res: any, next: any) {
-      res.render('index', { title: 'Express' });
-  });
+  module.exports.addRoutes = function(app: any){
 
-  router.post('/auth/login', authController.login);
+    rIndex.get('/', function(req: any, res: any, next: any) {
+        res.render('index', { title: 'Express' });
+    });
 
-module.exports = router;
+    rAuth.post('/auth/login', authController.login);
+
+    app.use('/', rIndex);
+    app.use('/api/', rAuth);
+
+    return app;
+  }

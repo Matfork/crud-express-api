@@ -1,36 +1,52 @@
  var express = require('express'),
-  router = express.Router(),
   authorController = require('../controllers/authorController'),
   bookController = require('../controllers/bookController'),
   userController = require('../controllers/userController'),
-  authController = require('../controllers/authController');
+  authMiddleware = require('../middleware/auth'),
+  rAuthor = express.Router(),
+  rBook = express.Router(),
+  rUser = express.Router();
 
-//When router works as a controller?? Relax, it is just a test
-// router.get('/book', (req, res) => {
-//     bookController.index().then(function(result){
-//       res.status(result.code).json(result.data);
-//     });
-// });
+  module.exports.addRoutes = function(app: any){
 
+    //Adding Middlewares for each router (This must be first step always before routing)
+      rAuthor = authMiddleware.addMiddlewares(rAuthor, ['*']);
+      rBook = authMiddleware.addMiddlewares(rBook, ['*']);
+      rUser = authMiddleware.addMiddlewares(rUser, ['*']);
 
-router.get('/author', authorController.index);
-router.get('/author/:id', authorController.show);
-router.post('/author', authorController.create);
-router.put('/author/:id', authorController.update);
-router.delete('/author/:id', authorController.delete);
+    //Setting Routers
+      //When router works as a controller?? Relax, it is just a test
+      // router.get('/', (req, res) => {
+      //     bookController.index().then(function(result){
+      //       res.status(result.code).json(result.data);
+      //     });
+      // });
 
-router.get('/book', bookController.index);
-router.get('/book/:id', bookController.show);
-router.post('/book', bookController.create);
-router.put('/book/:id', bookController.update);
-router.delete('/book/:id', bookController.delete);
+      rAuthor
+        .get('/', authorController.index)
+        .get('/:id', authorController.show)
+        .post('/', authorController.create)
+        .put('/:id', authorController.update)
+        .delete('/:id', authorController.delete);
 
-router.get('/user', userController.index);
-router.get('/user/:id', userController.show);
-router.post('/user', userController.create);
-router.put('/user/:id', userController.update);
-router.delete('/user/:id', userController.delete);
+      rBook
+        .get('/', bookController.index)
+        .get('/:id', bookController.show)
+        .post('/', bookController.create)
+        .put('/:id', bookController.update)
+        .delete('/:id', bookController.delete);
 
-router.post('/auth/login', authController.login);
+      rUser
+        .get('/', userController.index)
+        .get('/:id', userController.show)
+        .post('/', userController.create)
+        .put('/:id', userController.update)
+        .delete('/:id', userController.delete);
 
-module.exports = router;
+    //Exporting routers
+      app.use('/api/author', rAuthor);
+      app.use('/api/book', rBook);
+      app.use('/api/user', rUser);
+
+      return app;
+  }
