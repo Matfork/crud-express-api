@@ -1,5 +1,6 @@
  var express     = require('express'),
   authController = require('../controllers/authController'),
+  authMiddleware = require('../middleware/auth'),
   rIndex         = express.Router(),
   rAuth          = express.Router();
 
@@ -10,6 +11,7 @@
     });
 
     rAuth.post('/auth/login', authController.login);
+    rAuth.post('/auth/verify', authMiddleware.__verifyToken);
 
     app.use('/', rIndex);
     app.use('/api/', rAuth);

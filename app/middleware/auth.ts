@@ -12,16 +12,19 @@ var authM = class AuthMiddlware extends BaseMiddleware{
 
    //Add your middlewares logic here
     __verifyToken(req : any, res: any, next: any) {
-        let token = req.body.token || req.query.token || req.headers['x-access-token'];
+        let token = req.body.token || req.query.token || req.headers['authorization'].split(' ')[1];
+        let result : {code : number, error? : any,data? : any};
 
-        var result : {code : number, error? : any,data? : any};
         result = authController.verifyToken(token);
 
         if(result.error){
           res.status(result.code).json(result);
         }else if(result.data){
           res.decoded = result.data;
-          next();
+
+          (req.headers['verifyonly'])
+            ? res.status(200).json({code: 200, data: result.data})
+            : next();
         }else{
           res.status(500).json({code: 500, error: 'Unexpected Error on server'});
         }
