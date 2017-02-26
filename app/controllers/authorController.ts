@@ -1,5 +1,6 @@
 var Author = require('../models/').Author;
 var Book = require('../models/').Book;
+var sq = require('sequelize');
 
 var authorController = class {
   //Get a list of all authors using model.findAll()
@@ -64,6 +65,20 @@ var authorController = class {
     })
     .then(function (deletedRecords: any) {
       res.status(200).json({code: 200,data: deletedRecords})
+    })
+    .catch(function (error: any) {
+      res.status(500).json({code: 500,error: error})
+    });
+  }
+
+  //Get all authors for select drop down
+  public static getAllMap(req: any, res: any) {
+    Author.findAll({
+      attributes: ['id', [sq.fn('concat', sq.col('first_name'),' ',sq.col('last_name')), 'full_name']],
+      order: [['id', 'ASC']]
+    })
+    .then(function (author: any) {
+      res.status(200).json({code: 200,data: author})
     })
     .catch(function (error: any) {
       res.status(500).json({code: 500,error: error})

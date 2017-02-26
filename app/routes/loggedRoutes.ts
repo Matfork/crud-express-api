@@ -24,6 +24,7 @@
 
       rAuthor
         .get('/', authorController.index)
+        .get('/getAllMap', authorController.getAllMap)
         .get('/:id', authorController.show)
         .post('/', authorController.create)
         .put('/:id', authorController.update)

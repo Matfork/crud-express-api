@@ -9,7 +9,7 @@ class authUtils {
 
       try{
         //let token = jwt.sign({data: params}, process.env.JWT_SECRET_KEY,{expiresIn :  '10m'});
-        let token = jwt.sign({data: {email: params.email}}, process.env.JWT_SECRET_KEY,{expiresIn :  '60s'});
+        let token = jwt.sign({data: {email: params.email}}, process.env.JWT_SECRET_KEY,{expiresIn :  '1h'});
         result = {code: 200,data: token};
         console.log('New token generated');
       }catch(err){
