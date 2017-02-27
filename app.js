@@ -35,26 +35,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 // check routes directory files to see how we can accomplish this
 // app.use('/api',require('./built/routes/genRoutes.js'));
 // app.use('/api2',require('./built/routes/loggedRoutes.js'));
-
 app = require('./built/routes/genRoutes.js').addRoutes(app);
 app = require('./built/routes/loggedRoutes.js').addRoutes(app);
-
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
-
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
+app = require('./built/routes/errorRoutes.js').addRoutes(app);
 
 module.exports = app;
